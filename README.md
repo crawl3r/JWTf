@@ -2,18 +2,33 @@
   
 JWTF was built to help me further understand some funky attacks against JSON Web Tokens. So far this tool will take an existing JWT and allow the payload to be modified either dynamically (within an interactive shell - default), or automatically by supplying the choice and forcing it to run in one-liner mode.
   
-Modes:  
+## Modes:  
   
 0: Runs all  
 1: Allows patching and resigns target JWT with provided public key   
 2: Allows patching and rebuilds JWT with None algorithm  
+
+## Options:
+  
+```
+usage: jwtf.py [-h] [--ol] [--quiet] {0,1,2} ... jwt
+
+positional arguments:
+  {0,1,2}
+  jwt         The server supplied JWT
+
+optional arguments:
+  -h, --help  show this help message and exit
+  --ol        Run in one-liner
+  --quiet     Surpress debug prints and output noise
+```
   
 Interactive Usage (Mode = 1):  
 ```
 python3 jwtf.py 1 --key="test.pub" "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5"
 ```
-
-Output:
+  
+Output:  
 ```
 JWT the F**K?!
 Just trying to further understand web tokens...
@@ -56,8 +71,8 @@ Interactive Usage (Mode = 2):
 ```
 python3 jwtf.py 2 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5"
 ```
-
-Output:
+  
+Output:  
 ```
 JWT the F**K?!
 Just trying to further understand web tokens...
@@ -92,13 +107,13 @@ New JWT created and signed:
 eyJhbGciOiAiTm9uZSIsICJ0eXAiOiAiSldUIn0.eyJzdWIiOiAiMTIzNDU2Nzg5MCIsICJuYW1lIjogIlN1c2FuIiwgImlhdCI6IDE1MTYyMzkwMjJ9.
 ----------------------------------
 ```
-
-One-liner Usage (Mode = 2):
+  
+One-liner Usage (Mode = 2):  
 ```
 python3 jwtf.py 2 --choices="name:jeff" "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5" --ol
 ```
-
-Output:
+  
+Output:  
 ```
 JWT the F**K?!
 Just trying to further understand web tokens...
@@ -116,4 +131,16 @@ New JWT created and signed:
 ----------------------------------
 eyJhbGciOiAiTm9uZSIsICJ0eXAiOiAiSldUIn0.eyJzdWIiOiAiMTIzNDU2Nzg5MCIsICJuYW1lIjogImplZmYiLCAiaWF0IjogMTUxNjIzOTAyMn0.
 ----------------------------------
+```
+  
+## Quiet mode for pipeline usage  
+  
+Usage:
+```
+gary@MacBook-Air JwtTheFuck % python3 jwtf.py 2 --choices="name:jeff" "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5" --ol --quiet
+```
+  
+Output:
+```
+eyJhbGciOiAiTm9uZSIsICJ0eXAiOiAiSldUIn0.eyJzdWIiOiAiMTIzNDU2Nzg5MCIsICJuYW1lIjogImplZmYiLCAiaWF0IjogMTUxNjIzOTAyMn0.
 ```
