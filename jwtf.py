@@ -58,7 +58,7 @@ def handle_args():
     none_parser.add_argument('--choices', type=str, help="Payload choices to patch. i.e: \"user:admin,is_admin:true\"")
     none_parser.add_argument('--spam', type=str, help="Use variations of upper/lower case to spam a selection of JWTs (None, NOnE, etc)")
     
-    # parser.add_argument('--ol', help='Run in one-liner', action='store_true')
+    parser.add_argument('--ol', help='Run in one-liner', action='store_true')
     parser.add_argument("jwt", type=str, help="The server supplied JWT")
     parser.add_argument('--quiet', help='Surpress debug prints and output noise', action='store_true')
     
@@ -183,7 +183,7 @@ def sign_new_jwt(key, header, payload):
 if __name__ == "__main__":
     args = handle_args()
 
-    #ONE_LINER_MODE = args.ol
+    ONE_LINER_MODE = args.ol
     QUIET_OUTPUT_MODE = args.quiet
     JWT_TYPE_MODE = args.mode
 
