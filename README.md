@@ -4,7 +4,7 @@ JWTF was built to help me further understand some funky attacks against JSON Web
   
 ## Modes:  
   
-0: Runs all  
+0: Runs all  (W.I.P)
 1: Allows patching and resigns target JWT with provided public key   
 2: Allows patching and rebuilds JWT with None algorithm  
 
